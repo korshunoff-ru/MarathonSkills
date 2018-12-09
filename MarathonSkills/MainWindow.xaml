@@ -6,72 +6,186 @@
         xmlns:local="clr-namespace:MarathonSkills"
         mc:Ignorable="d"
         x:Name="AppWindow"
+        WindowStyle="None"
         WindowStartupLocation="CenterScreen"
-        Title="Marathon Skills 2018" MinHeight="600" MinWidth="800">
+        AllowsTransparency="true"
+        Title="Marathon Skills 2018"
+        MinWidth="{Binding WindowMinimumWidth}"
+        MinHeight="{Binding WindowMinimumHeight}">
+    
+    <WindowChrome.WindowChrome>
+        <WindowChrome
+            GlassFrameThickness="0"
+            ResizeBorderThickness="5"
+            CaptionHeight="35"
+            CornerRadius="0">
+        </WindowChrome>
+    </WindowChrome.WindowChrome>
+
+    <Window.Style>
+        <Style TargetType="{x:Type local:MainWindow}">
+            <Setter Property="Template">
+                <Setter.Value>
+
+                    <ControlTemplate TargetType="{x:Type Window}">
+                        <!-- Outer border with the drop shadow margin -->
+                        <Border Padding="{Binding OuterMarginSize, FallbackValue=0}" BorderBrush="Black" BorderThickness="{Binding FlatBorderThickness}">
+
+                            <!-- Main window outline -->
+                            <Grid>
+
+                                <!-- Outer dragging border -->
+                                <Border BorderThickness="{Binding BeingMoved, Converter={local:BooleanToBorderThicknessConverter}}"
+                                        Panel.ZIndex="2"
+                                        CornerRadius="{Binding WindowCornerRadius, FallbackValue=10}"/>
+
+                                <!-- Opacity mask for corners on grid -->
+                                <Border x:Name="Container"
+                                        Background="{StaticResource BackgroundTitleBrush}"
+                                        CornerRadius="{Binding WindowCornerRadius, FallbackValue=10}" />
+
+                                <!-- Window border and drop shadow -->
+                                <Border CornerRadius="{Binding WindowCornerRadius, FallbackValue=10}"
+                                    Background="White">
+                                    <Border.Effect>
+                                        <DropShadowEffect ShadowDepth="0.5" Opacity="0.2" />
+                                    </Border.Effect>
+                                </Border>
+
+                                <!-- The main window content -->
+                                <Grid>
+
+                                    <!-- Corner clipping -->
+                                    <Grid.OpacityMask>
+                                        <VisualBrush Visual="{Binding ElementName=Container}" />
+                                    </Grid.OpacityMask>
+
+                                    <Grid.RowDefinitions>
+
+                                        <!-- Title Bar -->
+                                        <RowDefinition Height="{Binding TitleHeightGridLength, FallbackValue=42}" />
+
+                                        <!-- Internet Connection Bar -->
+                                        <RowDefinition Height="Auto" />
+
+                                        <!-- Window Content -->
+                                        <RowDefinition Height="*" />
+
+                                    </Grid.RowDefinitions>
+
+                                    <!-- Title Bar -->
+                                    <Grid Grid.Column="0" Panel.ZIndex="1"
+                                          Background="{StaticResource BackgroundTitleBrush}">
+
+                                        <Grid.ColumnDefinitions>
+                                            <!-- Icon -->
+                                            <ColumnDefinition Width="Auto" />
+                                            <!-- Title -->
+                                            <ColumnDefinition Width="*" />
+                                            <!-- Windows Button -->
+                                            <ColumnDefinition Width="Auto" />
+
+                                        </Grid.ColumnDefinitions>
+
+                                        <!-- Icon --><!--
+                                        <Button Style="{StaticResource SystemIconButton}" Command="{Binding MenuCommand}">
+                                            <Image Source="/Images/Logo/logo-small.png" />
+                                        </Button>-->
+
+                                        <!-- Title -->
+                                        <Viewbox Grid.Column="0" Grid.ColumnSpan="3" Margin="5">
+                                            <TextBlock Grid.ColumnSpan="3"
+                                                    Text="{Binding Path=PageService.CurrentPage.Title, FallbackValue='Marathon Skills 2019'}"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    FontFamily="{StaticResource RobotoThin}"
+                                                    FontSize="{StaticResource MiddleFont}"
+                                                    Foreground="{StaticResource ForegroundTitleBrush}"/>
+                                        </Viewbox>
+
+                                        <!-- Window Buttons -->
+                                        <StackPanel Grid.Column="2"
+                                                        Orientation="Horizontal">
+
+                                            <Button Style="{StaticResource WindowControlButton}"
+                                                    Content="_"
+                                                    Command="{Binding MinimizeCommand}"
+                                                        Grid.Column="0"/>
+                                            <Button Style="{StaticResource WindowControlButton}" 
+                                                    Content="[ ]"
+                                                    Command="{Binding MaximizeCommand}"
+                                                        Grid.Column="1"/>
+                                            <Button Style="{StaticResource WindowCloseButton}"
+                                                    Content="X"
+                                                    Command="{Binding CloseCommand}"
+                                                        Grid.Column="2"/>
+
+                                        </StackPanel>
+
+                                    </Grid>
+
+                                    <!-- Page Content -->
+                                    <Border Grid.Row="2" Padding="{Binding InnerContentPadding}" ClipToBounds="True">
+                                        <ContentPresenter Content="{TemplateBinding Content}" />
+                                    </Border>
+
+                                </Grid>
+
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Style>
+
 
     <Grid>
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="200"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="30px"/>
         </Grid.RowDefinitions>
-        
-        <!--#region Page-->
-        
-        <Frame
-            x:Name="MainFrame"
-            Content="{Binding CurrentPage, Converter={local:ApplicationPageConverter}}">
 
-            <Frame.Style>
-                <Style TargetType="{x:Type Frame}">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource self}, Path=Content}"
-                                     Value="{x:Null}">
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate>
-                                        <StackPanel
-                                            HorizontalAlignment="Center"
-                                            VerticalAlignment="Center">
-                                            <TextBlock
-                                                FontWeight="Bold"
-                                                Text="404"
-                                                Foreground="{StaticResource BlackBrush}"
-                                                FontSize="{StaticResource VeryBigFont}"
-                                                HorizontalAlignment="Center"
-                                                VerticalAlignment="Center"/>
-                                            <TextBlock 
-                                                HorizontalAlignment="Center"
-                                                VerticalAlignment="Center"
-                                                Text="Не удалось найти страницу!"/>
+        <Grid>
 
-                                        </StackPanel>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Frame.Style>
-            
-        </Frame>
+            <Image Source="/Images/kek.jpg"
+                    Stretch="UniformToFill"></Image>
 
-        <!--#endregion-->
-        
-        <!--#region Footer-->
 
-        <Grid 
-            Grid.Row="1"
-            Background="{StaticResource DarkGrayBrush}">
-            <TextBlock
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                FontSize="{StaticResource MiddleFont}"
-                Foreground="{StaticResource WhiteBrush}"
-                Text="{Binding FooterText}"/>
+            <Grid Background="#000000"
+                      Opacity="0.3"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch"/>
+
+            <StackPanel 
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center">
+                <TextBlock Text="Marathon Skills 2019"
+                           FontSize="50"
+                           Foreground="White"
+                           FontFamily="{StaticResource RobotoRegular}"
+                           FontWeight="Bold"/>
+                <TextBlock Foreground="White"
+                               FontFamily="{StaticResource RobotoThin}"
+                               FontSize="{StaticResource BigFont}"
+                               HorizontalAlignment="Center">
+                        <Run>Россия, Москва</Run>
+                </TextBlock>
+                <TextBlock Foreground="White"
+                               FontFamily="{StaticResource RobotoThin}"
+                               FontSize="{StaticResource BigFont}"
+                               HorizontalAlignment="Center">
+                        <Run Text="{Binding Path=TimerService.Days, StringFormat={}{0} дней , FallbackValue=365}"></Run>
+                        <Run Text="{Binding Path=TimerService.Hours, StringFormat={}{0} часов  , FallbackValue=12}"></Run>
+                        <Run Text="{Binding Path=TimerService.Minutes, StringFormat={}{0} минут  , FallbackValue=35}"></Run>
+                        <Run Text="{Binding Path=TimerService.Seconds, StringFormat={}{0} секунд до старта марафона, FallbackValue=56}"></Run>
+                </TextBlock>
+            </StackPanel>
+
         </Grid>
-        
-        <!--#endregion-->
-        
+
+        <Frame NavigationUIVisibility="Hidden" Grid.Row="1" Content="{Binding Path=PageService.CurrentPage, UpdateSourceTrigger=PropertyChanged}"/>
     </Grid>
+    
 </Window>

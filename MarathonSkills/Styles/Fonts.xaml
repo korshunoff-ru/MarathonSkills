@@ -3,21 +3,16 @@
                     xmlns:sys="clr-namespace:System;assembly=mscorlib"
                     xmlns:local="clr-namespace:MarathonSkills">
 
-    <!--Header font-->
-    <FontFamily x:Key="OpenSansSemibold">Open Sans Semibold</FontFamily>
-    <!--Text font-->
-    <FontFamily x:Key="OpenSansLight">Open Sans Light</FontFamily>
 
-    <!--Colors-->
-    <Color x:Key="BrazilianGreenColor"  R="0" G="144" B="64" A="255"/>
-    <Color x:Key="BrazilianYellowColor"  R="253" G="193" B="0" A="255"/>
-    <Color x:Key="BrazilianBlue"  R="36" G="29" B="112" A="255"/>
-    <Color x:Key="WhiteColor" R="255" G="255" B="255" A="255"/>
-    <Color x:Key="LightGrayColor"  R="235" G="235" B="235" A="255"/>
-    <Color x:Key="GrayColor" R="180" G="180" B="180" A="255"/>
-    <Color x:Key="DarkGrayColor"  R="80" G="80" B="80" A="255"/>
-    <Color x:Key="BlackColor"  R="0" G="0" B="0" A="255"/>
+    <!-- Fonts -->
+    <FontFamily x:Key="RobotoRegular">pack://application:,,,/Fonts/#Roboto Regular</FontFamily>
+    <FontFamily x:Key="RobotoThin">pack://application:,,,/Fonts/#Roboto Thin</FontFamily>
     
+    <!-- Colors -->
+    <Color x:Key="BackgroundTitleColor">#5295d8</Color>
+    <Color x:Key="ForegroundHoverColor">#96c7f7</Color>
+    <Color x:Key="ForegroundTitleColor">#ffffff</Color>
+
     <!--Font size-->
     <sys:Double x:Key="SmallFont">14</sys:Double>
     <sys:Double x:Key="MiddleFont">18</sys:Double>
@@ -25,23 +20,19 @@
     <sys:Double x:Key="VeryBigFont">36</sys:Double>
     
     <!--Brushes-->
-    <SolidColorBrush x:Key="BrazilianGreenBrush" Color="{StaticResource BrazilianGreenColor}"/>
-    <SolidColorBrush x:Key="BrazilianYellowBrush" Color="{StaticResource BrazilianYellowColor}"/>
-    <SolidColorBrush x:Key="BrazilianBlueBrush" Color="{StaticResource BrazilianBlueColor}"/>
-    <SolidColorBrush x:Key="WhiteBrush" Color="{StaticResource WhiteColor}"/>
-    <SolidColorBrush x:Key="BlackBrush" Color="{StaticResource BlackColor}"/>
-    <SolidColorBrush x:Key="LightGrayBrush" Color="{StaticResource LightGrayColor}"/>
-    <SolidColorBrush x:Key="GrayBrush" Color="{StaticResource GrayColor}"/>
-    <SolidColorBrush x:Key="DarkGrayBrush" Color="{StaticResource DarkGrayColor}"/>
+    <SolidColorBrush x:Key="BackgroundTitleBrush" Color="{StaticResource BackgroundTitleColor}"></SolidColorBrush>
+    <SolidColorBrush x:Key="ForegroundTitleBrush" Color="{StaticResource ForegroundTitleColor}"></SolidColorBrush>
+    <SolidColorBrush x:Key="ForegroundHoverBrush" Color="{StaticResource ForegroundHoverColor}"></SolidColorBrush>
+
 
     <!--Base styles-->
-    <Style x:Key="BaseControlStyle" TargetType="{x:Type Control}">
-        <Setter Property="FontFamily" Value="{StaticResource OpenSansLight}"/>
+    <Style x:Key="BaseStyle" TargetType="{x:Type Control}">
+        <Setter Property="FontFamily" Value="{StaticResource RobotoRegular}"/>
         <Setter Property="FontSize" Value="{StaticResource SmallFont}"/>
     </Style>
     
     <Style x:Key="BaseTextBlockStyle" TargetType="{x:Type TextBlock}">
-        <Setter Property="FontFamily" Value="{StaticResource OpenSansLight}"/>
+        <Setter Property="FontFamily" Value="{StaticResource RobotoRegular}"/>
         <Setter Property="FontSize" Value="{StaticResource SmallFont}"/>
     </Style>
 

@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace MarathonSkills
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for SponsorPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class SponsorPage : BasePage
     {
-        public MainWindow()
+        public SponsorPage()
         {
             InitializeComponent();
         }

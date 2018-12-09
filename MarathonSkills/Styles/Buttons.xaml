@@ -2,64 +2,131 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:MarathonSkills">
 
-    <Style x:Key="MenuButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource BaseControlStyle}">
+    <!-- System Icon Button -->
+    <Style TargetType="{x:Type Button}" x:Key="SystemIconButton" BasedOn="{StaticResource Hoverless}">
 
-        <Setter Property="Foreground" Value="{StaticResource DarkGrayBrush}"/>
-        <Setter Property="Background" Value="{StaticResource LightGrayBrush}"/>
-        <Setter Property="Padding" Value="20"/>
-        <Setter Property="FontSize" Value="22"/>
-        <Setter Property="BorderBrush" Value="{StaticResource DarkGrayBrush}"/>
-        <Setter Property="Margin" Value="10"/>
+        <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
+        <Setter Property="Margin" Value="10" />
+
+    </Style>
+
+    <!-- Window Control Button -->
+    <Style TargetType="{x:Type Button}" x:Key="WindowControlButton" BasedOn="{StaticResource BaseStyle}">
+        <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Padding" Value="8" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="Foreground" Value="{StaticResource ForegroundTitleBrush}" />
+
+        <Setter Property="LayoutTransform">
+            <Setter.Value>
+                <ScaleTransform ScaleX="1.5" />
+            </Setter.Value>
+        </Setter>
 
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type ButtonBase}">
-                    <Border x:Name="border" 
-                            CornerRadius="10" 
-                            BorderBrush="{TemplateBinding BorderBrush}" 
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}">
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{TemplateBinding Content}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource ForegroundHoverBrush}" />
+            </Trigger>
+        </Style.Triggers>
+
+    </Style>
+
+    <!-- Window Close Button -->
+    <Style TargetType="{x:Type Button}" x:Key="WindowCloseButton" BasedOn="{StaticResource WindowControlButton}">
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="Red" />
+            </Trigger>
+        </Style.Triggers>
+
+    </Style>
+
+    <Style x:Key="SelectButton" TargetType="{x:Type Button}" BasedOn="{StaticResource BaseStyle}">
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Background" Value="{StaticResource ForegroundHoverBrush}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" 
                             BorderThickness="{TemplateBinding BorderThickness}" 
-                            Background="{TemplateBinding Background}" 
-                            SnapsToDevicePixels="True">
-                        <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="200"
+                            x:Name="border"
+                            Width="200"
+                            Height="200">
+
+                        <Border.Effect>
+                            <DropShadowEffect Color="#000000" Opacity="0.5" ShadowDepth="0" BlurRadius="0"/>
+
+                        </Border.Effect>
+                        
+                        <ContentPresenter Margin="{TemplateBinding Padding}"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"/>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <EventTrigger RoutedEvent="Button.MouseLeave">
+                        <EventTrigger RoutedEvent="MouseEnter">
                             <BeginStoryboard>
                                 <Storyboard>
-                                    <ColorAnimation To="{StaticResource LightGrayColor}" 
-                                        Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" 
-                                        FillBehavior="HoldEnd" 
-                                        Duration="0:0:0.1"/>
-                                    <ColorAnimation To="{StaticResource DarkGrayColor}" 
-                                        Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)" 
-                                        FillBehavior="HoldEnd" 
-                                        Duration="0:0:0.1"/>
+                                    <DoubleAnimation Storyboard.TargetName="border"
+                                                     Storyboard.TargetProperty="Width"
+                                                     Duration="0:0:0.1"
+                                                     To="236">
+                                    </DoubleAnimation>
+                                    <DoubleAnimation Storyboard.TargetName="border"
+                                                     Storyboard.TargetProperty="Height"
+                                                     Duration="0:0:0.1"
+                                                     To="236">
+                                    </DoubleAnimation>
+                                    <ColorAnimation Storyboard.TargetName="border" Duration="0:0:0.1"
+                                            Storyboard.TargetProperty="Background.Color"
+                                            To="{StaticResource BackgroundTitleColor}">
+                                    </ColorAnimation>
+                                    <DoubleAnimation Storyboard.TargetName="border"
+                                                     Storyboard.TargetProperty="Effect.BlurRadius"
+                                                     Duration="0:0:0.1"
+                                                     To="5"/>
+                                </Storyboard>
+                                
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="MouseLeave">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="border"
+                                                     Storyboard.TargetProperty="Width"
+                                                     Duration="0:0:0.1">
+                                    </DoubleAnimation>
+                                    <DoubleAnimation Storyboard.TargetName="border"
+                                                     Storyboard.TargetProperty="Height"
+                                                     Duration="0:0:0.1">
+                                    </DoubleAnimation>
+                                    <ColorAnimation Storyboard.TargetName="border" Duration="0:0:0.1"
+                                            Storyboard.TargetProperty="Background.Color">
+                                    </ColorAnimation>
+                                    <DoubleAnimation Storyboard.TargetName="border"
+                                                     Storyboard.TargetProperty="Effect.BlurRadius"
+                                                     Duration="0:0:0.1">
+                                    </DoubleAnimation>
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger>
-                        <EventTrigger RoutedEvent="Button.MouseEnter">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ColorAnimation To="{StaticResource GrayColor}" 
-                                        Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" 
-                                        FillBehavior="HoldEnd" 
-                                        Duration="0:0:0.2"/>
-                                    <ColorAnimation To="{StaticResource WhiteColor}" 
-                                        Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)" 
-                                        FillBehavior="HoldEnd" 
-                                        Duration="0:0:0.2"/>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Cursor" Value="Hand"/>
-                            <Setter Property="BorderBrush" Value="{StaticResource DarkGrayBrush}"/>
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Background" TargetName="border" Value="#FFF4F4F4"/>
-                            <Setter Property="BorderBrush" TargetName="border" Value="#FFADB2B5"/>
-                            <Setter Property="Foreground" Value="#FF838383"/>
-                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
