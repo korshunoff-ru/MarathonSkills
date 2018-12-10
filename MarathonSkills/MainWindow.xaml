@@ -158,11 +158,21 @@
                       HorizontalAlignment="Stretch"
                       VerticalAlignment="Stretch"/>
 
+            <Button Style="{StaticResource BackButton}"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Stretch"
+                    Command="{Binding BackCommand}">
+
+                <ContentControl Width="128" Opacity="1" Content="{StaticResource BackIcon}"/>
+
+            </Button>
+            
             <StackPanel 
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center">
                 <TextBlock Text="Marathon Skills 2019"
                            FontSize="50"
+                           TextAlignment="Center"
                            Foreground="White"
                            FontFamily="{StaticResource RobotoRegular}"
                            FontWeight="Bold"/>
@@ -179,7 +189,7 @@
                         <Run Text="{Binding Path=TimerService.Days, StringFormat={}{0} дней , FallbackValue=365}"></Run>
                         <Run Text="{Binding Path=TimerService.Hours, StringFormat={}{0} часов  , FallbackValue=12}"></Run>
                         <Run Text="{Binding Path=TimerService.Minutes, StringFormat={}{0} минут  , FallbackValue=35}"></Run>
-                        <Run Text="{Binding Path=TimerService.Seconds, StringFormat={}{0} секунд до старта марафона, FallbackValue=56}"></Run>
+                        <Run Text="{Binding Path=TimerService.Seconds, StringFormat={}{0} секунд до старта марафона!, FallbackValue=56}"></Run>
                 </TextBlock>
             </StackPanel>
 

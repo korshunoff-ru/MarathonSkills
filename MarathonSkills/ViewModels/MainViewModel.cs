@@ -20,6 +20,7 @@ namespace MarathonSkills
         public RelayCommand MinimizeCommand { get; set; }
         public RelayCommand MaximizeCommand { get; set; }
         public RelayCommand CloseCommand { get; set; }
+        public RelayCommand BackCommand { get; set; }
 
         #endregion
 
@@ -45,6 +46,11 @@ namespace MarathonSkills
             {
                 Application.Current.MainWindow.Close();
             });
+
+            BackCommand = new RelayCommand(() =>
+            {
+                PageService.GoBack();
+            }, () => PageService.IsCanBack);
 
         }
 

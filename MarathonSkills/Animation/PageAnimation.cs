@@ -16,6 +16,6 @@
         /// <summary>
         /// The page slides out and fades out to the left
         /// </summary>
-        SlideAndFadeOutToLeft = 2,
+        SlideAndFadeOutToLeft = 2
     }
 }

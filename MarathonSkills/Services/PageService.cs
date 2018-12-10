@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows.Controls;
 
 namespace MarathonSkills
@@ -8,8 +9,8 @@ namespace MarathonSkills
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private Page _currentPage;
-        public Page CurrentPage
+        private BasePage _currentPage;
+        public BasePage CurrentPage
         {
             get => _currentPage;
             set
@@ -17,6 +18,56 @@ namespace MarathonSkills
                 _currentPage = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CurrentPage)));
             }
+        }
+
+        private Stack<BasePage> _pagesHistory;
+        public Stack<BasePage> PagesHistory
+        {
+            get => _pagesHistory;
+            set
+            {
+                _pagesHistory = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(PagesHistory)));
+            }
+        }
+
+        private bool _isCanBack;
+        public bool IsCanBack
+        {
+            get => _isCanBack;
+            private set
+            {
+                _isCanBack = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsCanBack)));
+            }
+        }
+
+        public PageService()
+        {
+            PagesHistory = new Stack<BasePage>();
+        }
+
+        private void PushPageHistroy(BasePage page)
+        {
+            if (PagesHistory == null)
+                return;
+            PagesHistory.Push(page);
+            IsCanBack = true;
+        }
+
+        private BasePage PopPageHistroy()
+        {
+            if (PagesHistory == null || PagesHistory.Count == 0)
+            {
+                IsCanBack = false;
+                return null;
+            }
+            var page = PagesHistory.Pop();
+            if (PagesHistory.Count == 0)
+            {
+                IsCanBack = false;
+            }
+            return page;
         }
 
         public async void GoToPage(ApplicationPage page)
@@ -27,7 +78,9 @@ namespace MarathonSkills
                     if (CurrentPage != null)
                     {
                         await CurrentPage.SlideAndFadeOutToLeftAsync(0.4f);
+                        PushPageHistroy(CurrentPage);
                     }
+                    
                     CurrentPage = new HomePage();
                     CurrentPage.DataContext = BootStrapper.Resolve<HomePageViewModel>();
                     break;
@@ -35,6 +88,7 @@ namespace MarathonSkills
                     if (CurrentPage != null)
                     {
                         await CurrentPage.SlideAndFadeOutToLeftAsync(0.4f);
+                        PushPageHistroy(CurrentPage);
                     }
                     CurrentPage = new SponsorPage();
                     CurrentPage.DataContext = BootStrapper.Resolve<SponsorPageViewModel>();
@@ -43,6 +97,7 @@ namespace MarathonSkills
                     if (CurrentPage != null)
                     {
                         await CurrentPage.SlideAndFadeOutToLeftAsync(0.4f);
+                        PushPageHistroy(CurrentPage);
                     }
                     CurrentPage = new RunnerPage();
                     CurrentPage.DataContext = BootStrapper.Resolve<RunnerPageViewModel>();
@@ -51,6 +106,15 @@ namespace MarathonSkills
                     break;
             }
         }
+
+        public async void GoBack()
+        {
+            if (PagesHistory != null || PagesHistory.Count != 0)
+            {
+                CurrentPage = PopPageHistroy();
+            }
+        }
+
 
     }
 }

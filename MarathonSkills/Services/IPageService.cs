@@ -6,7 +6,10 @@ namespace MarathonSkills
 {
     public interface IPageService
     {
-        Page CurrentPage { get; }
+        BasePage CurrentPage { get; }
+        bool IsCanBack { get; }
+        Stack<BasePage> PagesHistory { get; }
         void GoToPage(ApplicationPage page);
+        void GoBack();
     }
 }
