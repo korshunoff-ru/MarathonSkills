@@ -14,40 +14,44 @@
                   HorizontalAlignment="Center"
                   VerticalAlignment="Center">
 
-            <Button Style="{StaticResource MenuButtonStyle}"
-                    Command="{Binding RunnerCommand}">
+            <Button Style="{StaticResource MenuButtonStyle}">
 
                 <StackPanel>
                     <Viewbox Stretch="Uniform" Width="64" Height="64">
                         <ContentControl Content="{StaticResource RunnerIcon}"/>
                     </Viewbox>
-                    <Grid Width="140"
-                          Height="50"
+                    <StackPanel Width="140"
+                          Height="70"
                           HorizontalAlignment="Center"
                           VerticalAlignment="Center">
                         <TextBlock Style="{StaticResource MenuItemStyle}">
                             ВХОД
                         </TextBlock>
-                    </Grid>
+                        <TextBlock Style="{StaticResource MenuItemDescriptionStyle}">
+                            Если вы учавствовали ранее
+                        </TextBlock>
+                    </StackPanel>
                 </StackPanel>
 
             </Button>
 
-            <Button Style="{StaticResource MenuButtonStyle}"
-                    Command="{Binding RunnerCommand}">
+            <Button Style="{StaticResource MenuButtonStyle}">
 
                 <StackPanel>
                     <Viewbox Stretch="Uniform" Width="64" Height="64">
                         <ContentControl Content="{StaticResource MoneyIcon}"/>
                     </Viewbox>
-                    <Grid Width="140"
-                          Height="50"
+                    <StackPanel Width="140"
+                          Height="60"
                           HorizontalAlignment="Center"
                           VerticalAlignment="Center">
                         <TextBlock Style="{StaticResource MenuItemStyle}">
                             РЕГИСТРАЦИЯ
                         </TextBlock>
-                    </Grid>
+                        <TextBlock Style="{StaticResource MenuItemDescriptionStyle}">
+                            Если вы здесь впервые
+                        </TextBlock>
+                    </StackPanel>
                 </StackPanel>
 
             </Button>

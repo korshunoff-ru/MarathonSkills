@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Animation;
+using System.Windows.Threading;
 
 namespace MarathonSkills
 {
@@ -27,20 +28,31 @@ namespace MarathonSkills
 
     public class Animation
     {
-
         private Storyboard _storyboard;
         private double _totalSeconds;
+
+        public event EventHandler Completed;
 
         public Animation()
         {
             _storyboard = new Storyboard();
+            _storyboard.Completed += (sender, e) =>
+            {
+                Completed?.Invoke(sender, e);
+            };
             _totalSeconds = 0;
         }
 
-        public async Task Start(FrameworkElement element)
+        public async Task StartAsync(FrameworkElement element)
         {
             _storyboard.Begin(element);
             await Task.Delay((int)(_totalSeconds * 1000));
+        }
+
+        public void Start(FrameworkElement element)
+        {
+            _storyboard.Begin(element);
+            Task.Delay((int)(_totalSeconds * 1000));
         }
 
         public Animation AddSlide(AnimationSlide animation, double offset, double seconds = .25)
@@ -140,7 +152,7 @@ namespace MarathonSkills
                 default:
                     break;
             }
-            _totalSeconds += seconds;
+            _totalSeconds = _totalSeconds > seconds ? _totalSeconds : seconds;
             return this;
         }
 
@@ -172,14 +184,25 @@ namespace MarathonSkills
                     Storyboard.SetTargetProperty(animFadeOut, new PropertyPath("Opacity"));
                     _storyboard.Children.Add(animFadeOut);
                     break;
-                    break;
                 default:
                     break;
             }
-            _totalSeconds += seconds;
+            _totalSeconds = _totalSeconds > seconds ? _totalSeconds : seconds;
             return this;
         }
 
+    }
+
+    public static class ExtensionMethods
+    {
+
+        private static Action EmptyDelegate = delegate () { };
+
+
+        public static void Refresh(this UIElement uiElement)
+        {
+            uiElement.Dispatcher.Invoke(DispatcherPriority.Render, EmptyDelegate);
+        }
     }
 
 }

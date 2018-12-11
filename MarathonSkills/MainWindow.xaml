@@ -169,7 +169,8 @@
                 Content="&#x3c;"
                 Panel.ZIndex="2"
                 Style="{StaticResource BackButtonStyle}"
-                Command="{Binding BackCommand}">
+                Command="{Binding BackCommand}"
+                IsEnabled="{Binding PageService.IsCanBack}">
         </Button>
 
         <Frame NavigationUIVisibility="Hidden" 

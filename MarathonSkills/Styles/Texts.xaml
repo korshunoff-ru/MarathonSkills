@@ -39,4 +39,15 @@
         <Setter Property="FontFamily" Value="{StaticResource RobotoMedium}"/>
     </Style>
 
+    <Style x:Key="MenuItemDescriptionStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource BaseTextBlockStyle}">
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="FontSize" Value="{StaticResource TinySize}"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="0 5 0 0"/>
+        <Setter Property="Foreground" Value="{StaticResource ForegroundSecondaryBrush}"/>
+        <Setter Property="FontFamily" Value="{StaticResource RobotoThin}"/>
+    </Style>
+
 </ResourceDictionary>

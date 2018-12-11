@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace MarathonSkills
 {
@@ -88,7 +91,7 @@ namespace MarathonSkills
                         await new Animation()
                             .AddSlide(AnimationSlide.SlideToBottom, CurrentPage.WindowHeight)
                             .AddFade(AnimationFade.FadeOut)
-                            .Start(CurrentPage);
+                            .StartAsync(CurrentPage);
                         PushPageHistroy(CurrentPage);
                     }
                     
@@ -99,7 +102,7 @@ namespace MarathonSkills
                         await new Animation()
                             .AddSlide(AnimationSlide.SlideFromTop, CurrentPage.WindowWidth)
                             .AddFade(AnimationFade.FadeIn)
-                            .Start(CurrentPage);
+                            .StartAsync(CurrentPage);
                     };
                     break;
                 case ApplicationPage.SponsorPage:
@@ -108,7 +111,7 @@ namespace MarathonSkills
                         await new Animation()
                             .AddSlide(AnimationSlide.SlideToBottom, CurrentPage.WindowHeight)
                             .AddFade(AnimationFade.FadeOut)
-                            .Start(CurrentPage);
+                            .StartAsync(CurrentPage);
                         PushPageHistroy(CurrentPage);
                     }
                     CurrentPage = new SponsorPage();
@@ -118,7 +121,7 @@ namespace MarathonSkills
                         await new Animation()
                             .AddSlide(AnimationSlide.SlideFromTop, CurrentPage.WindowWidth)
                             .AddFade(AnimationFade.FadeIn)
-                            .Start(CurrentPage);
+                            .StartAsync(CurrentPage);
                     };
                     break;
                 case ApplicationPage.RunnerPage:
@@ -127,7 +130,7 @@ namespace MarathonSkills
                         await new Animation()
                             .AddSlide(AnimationSlide.SlideToBottom, CurrentPage.WindowHeight)
                             .AddFade(AnimationFade.FadeOut)
-                            .Start(CurrentPage);
+                            .StartAsync(CurrentPage);
                         PushPageHistroy(CurrentPage);
                     }
                     CurrentPage = new RunnerPage();
@@ -137,7 +140,7 @@ namespace MarathonSkills
                         await new Animation()
                             .AddSlide(AnimationSlide.SlideFromTop, CurrentPage.WindowWidth)
                             .AddFade(AnimationFade.FadeIn)
-                            .Start(CurrentPage);
+                            .StartAsync(CurrentPage);
                     };
                     break;
                 default:
@@ -152,18 +155,23 @@ namespace MarathonSkills
         {
             if (PagesHistory != null || PagesHistory.Count != 0)
             {
+
                 await new Animation()
-                            .AddSlide(AnimationSlide.SlideToTop, CurrentPage.WindowHeight)
-                            .AddFade(AnimationFade.FadeOut)
-                            .Start(CurrentPage);
+                   .AddSlide(AnimationSlide.SlideToTop, CurrentPage.WindowHeight)
+                   .AddFade(AnimationFade.FadeOut)
+                   .StartAsync(CurrentPage);
+
                 CurrentPage = PopPageHistroy();
-                CurrentPage.Loaded += async (sender, e) =>
+
+                CurrentPage.Loaded += async (senderTwo, eTwo) =>
                 {
                     await new Animation()
                         .AddSlide(AnimationSlide.SlideFromBottom, CurrentPage.WindowWidth)
                         .AddFade(AnimationFade.FadeIn)
-                        .Start(CurrentPage);
+                        .StartAsync(CurrentPage);
                 };
+
+
             }
         }
 

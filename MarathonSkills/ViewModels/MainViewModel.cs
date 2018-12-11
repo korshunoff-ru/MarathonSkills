@@ -50,7 +50,7 @@ namespace MarathonSkills
             BackCommand = new RelayCommand(() =>
             {
                 PageService.GoBack();
-            }, () => PageService.IsCanBack);
+            });
 
         }
 
