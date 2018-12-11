@@ -28,7 +28,7 @@ namespace MarathonSkills
         {
 
             TimerService = timerService;
-            TimerService.Start(new DateTime(2018, 12, 10, 0, 0, 0));
+            TimerService.Start(new DateTime(2018, 12, 11, 0, 0, 0));
 
             PageService.GoToPage(ApplicationPage.HomePage);
 

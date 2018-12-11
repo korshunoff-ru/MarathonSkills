@@ -3,37 +3,59 @@
                     xmlns:sys="clr-namespace:System;assembly=mscorlib"
                     xmlns:local="clr-namespace:MarathonSkills">
 
-
-    <!-- Fonts -->
+    <!--#region Fonts -->
+    
     <FontFamily x:Key="RobotoRegular">pack://application:,,,/Fonts/#Roboto Regular</FontFamily>
+    <FontFamily x:Key="RobotoLight">pack://application:,,,/Fonts/#Roboto Light</FontFamily>
+    <FontFamily x:Key="RobotoMedium">pack://application:,,,/Fonts/#Roboto Medium</FontFamily>
+    <FontFamily x:Key="RobotoBold">pack://application:,,,/Fonts/#Roboto Bold</FontFamily>
     <FontFamily x:Key="RobotoThin">pack://application:,,,/Fonts/#Roboto Thin</FontFamily>
     
-    <!-- Colors -->
-    <Color x:Key="BackgroundTitleColor">#5295d8</Color>
-    <Color x:Key="ForegroundHoverColor">#96c7f7</Color>
-    <Color x:Key="ForegroundTitleColor">#ffffff</Color>
-
-    <!--Font size-->
-    <sys:Double x:Key="SmallFont">14</sys:Double>
-    <sys:Double x:Key="MiddleFont">18</sys:Double>
-    <sys:Double x:Key="BigFont">24</sys:Double>
-    <sys:Double x:Key="VeryBigFont">36</sys:Double>
+    <!--#endregion-->
     
-    <!--Brushes-->
-    <SolidColorBrush x:Key="BackgroundTitleBrush" Color="{StaticResource BackgroundTitleColor}"></SolidColorBrush>
-    <SolidColorBrush x:Key="ForegroundTitleBrush" Color="{StaticResource ForegroundTitleColor}"></SolidColorBrush>
-    <SolidColorBrush x:Key="ForegroundHoverBrush" Color="{StaticResource ForegroundHoverColor}"></SolidColorBrush>
+    <!--#region Colors -->
+    
+    <Color x:Key="BackgroundSecondaryColor">#5295d8</Color>
+    <Color x:Key="BackgroundMainColor">#f2f2f2</Color>
+    <Color x:Key="ForegroundSecondaryColor">#ffffff</Color>
+    <Color x:Key="ForegroundMainColor">#96c7f7</Color>
+    <Color x:Key="BackgroundSecondaryHoverColor">#96c7f7</Color>
+    <Color x:Key="ForegroundHeaderColor">#000000</Color>
 
+    <!--#endregion-->
+    
+    <!--#region Brushes -->
 
-    <!--Base styles-->
+    <SolidColorBrush x:Key="BackgroundTitleBrush" Color="{StaticResource BackgroundSecondaryColor}"></SolidColorBrush>
+    <SolidColorBrush x:Key="BackgroundMainBrush" Color="{StaticResource BackgroundMainColor}"></SolidColorBrush>
+    <SolidColorBrush x:Key="BackgroundSecondaryBrush" Color="{StaticResource BackgroundSecondaryColor}"></SolidColorBrush>
+    <SolidColorBrush x:Key="ForegroundSecondaryBrush" Color="{StaticResource ForegroundSecondaryColor}"></SolidColorBrush>
+    <SolidColorBrush x:Key="BackgroundSecondaryHoverBrush" Color="{StaticResource BackgroundSecondaryHoverColor}"></SolidColorBrush>
+
+    <!--#endregion-->
+    
+    <!--#region Sizes -->
+    
+    <sys:Double x:Key="TinySize">12</sys:Double>
+    <sys:Double x:Key="SmallSize">18</sys:Double>
+    <sys:Double x:Key="RegularSize">24</sys:Double>
+    <sys:Double x:Key="BigSize">30</sys:Double>
+    <sys:Double x:Key="HugeSize">42</sys:Double>
+    
+    <!--#endregion-->
+    
+    <!--#region Base styles -->
+
     <Style x:Key="BaseStyle" TargetType="{x:Type Control}">
-        <Setter Property="FontFamily" Value="{StaticResource RobotoRegular}"/>
-        <Setter Property="FontSize" Value="{StaticResource SmallFont}"/>
+        <Setter Property="FontFamily" Value="{StaticResource RobotoThin}"/>
+        <Setter Property="FontSize" Value="{StaticResource RegularSize}"/>
     </Style>
-    
+
     <Style x:Key="BaseTextBlockStyle" TargetType="{x:Type TextBlock}">
-        <Setter Property="FontFamily" Value="{StaticResource RobotoRegular}"/>
-        <Setter Property="FontSize" Value="{StaticResource SmallFont}"/>
+        <Setter Property="FontFamily" Value="{StaticResource RobotoMedium}"/>
+        <Setter Property="FontSize" Value="{StaticResource RegularSize}"/>
     </Style>
+
+    <!--#endregion-->
 
 </ResourceDictionary>

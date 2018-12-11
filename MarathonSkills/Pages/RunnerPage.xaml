@@ -8,80 +8,46 @@
              d:DesignHeight="450" d:DesignWidth="800"
              Title="Стать бегуном">
 
-    <Grid Background="White">
+    <Grid>
 
         <StackPanel Orientation="Horizontal" Grid.Row="1"
                   HorizontalAlignment="Center"
                   VerticalAlignment="Center">
 
-            <Button Style="{StaticResource SelectButton}"
-                    Command="{Binding GoToOnePage}">
+            <Button Style="{StaticResource MenuButtonStyle}"
+                    Command="{Binding RunnerCommand}">
 
                 <StackPanel>
-
-                    <Viewbox Stretch="Uniform" Width="80" Height="80">
+                    <Viewbox Stretch="Uniform" Width="64" Height="64">
                         <ContentControl Content="{StaticResource RunnerIcon}"/>
                     </Viewbox>
-
-                    <TextBlock FontFamily="{StaticResource RobotoRegular}"
-                                   Margin="10"
-                                   FontWeight="Bold"
-                                   FontSize="{StaticResource MiddleFont}"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"
-                                   Foreground="{StaticResource ForegroundTitleBrush}">
+                    <Grid Width="140"
+                          Height="50"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center">
+                        <TextBlock Style="{StaticResource MenuItemStyle}">
                             ВХОД
-                    </TextBlock>
-
-                    <TextBlock FontFamily="{StaticResource RobotoRegular}"
-                                   Margin="5 0 5 5"
-                                   FontSize="{StaticResource SmallFont}"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"
-                               TextWrapping="Wrap"
-                               TextAlignment="Center"
-                               Width="100"
-                               Height="50"
-                                   Foreground="{StaticResource ForegroundTitleBrush}">
-                            Если вы учавствовали ранее
-                    </TextBlock>
-
+                        </TextBlock>
+                    </Grid>
                 </StackPanel>
 
             </Button>
 
-            <Button Grid.Column="1" Style="{StaticResource SelectButton}"
-                    Command="{Binding SponsorCommand}">
+            <Button Style="{StaticResource MenuButtonStyle}"
+                    Command="{Binding RunnerCommand}">
 
                 <StackPanel>
-
-                    <Viewbox Width="80" Height="80" Stretch="Uniform">
+                    <Viewbox Stretch="Uniform" Width="64" Height="64">
                         <ContentControl Content="{StaticResource MoneyIcon}"/>
                     </Viewbox>
-
-                    <TextBlock FontFamily="{StaticResource RobotoRegular}"
-                                   Margin="10"
-                                   FontWeight="Bold"
-                                   FontSize="{StaticResource MiddleFont}"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"
-                                   Foreground="{StaticResource ForegroundTitleBrush}">
+                    <Grid Width="140"
+                          Height="50"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center">
+                        <TextBlock Style="{StaticResource MenuItemStyle}">
                             РЕГИСТРАЦИЯ
-                    </TextBlock>
-
-                    <TextBlock FontFamily="{StaticResource RobotoRegular}"
-                                   Margin="5 0 5 5"
-                                   FontSize="{StaticResource SmallFont}"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"
-                               TextWrapping="Wrap"
-                               Width="100"
-                               Height="50"
-                               TextAlignment="Center"
-                                   Foreground="{StaticResource ForegroundTitleBrush}">
-                            Если вы здесь первый раз
-                    </TextBlock>
-
+                        </TextBlock>
+                    </Grid>
                 </StackPanel>
 
             </Button>

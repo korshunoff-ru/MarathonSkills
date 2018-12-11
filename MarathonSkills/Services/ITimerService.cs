@@ -10,13 +10,9 @@ namespace MarathonSkills
 {
     public interface ITimerService : INotifyPropertyChanged
     {
-    
-        int Seconds { get; }
-        int Minutes { get; }
-        int Hours { get; }
-        int Days { get; }
 
         DateTime DateStart { get; }
+        TimeSpan TimeToEnd { get; }
 
         void Start(DateTime dateStart);
         void Stop();
@@ -29,47 +25,14 @@ namespace MarathonSkills
 
         private DispatcherTimer _dispatcherTimer;
 
-        private int _seconds;
-        public int Seconds
+        private TimeSpan _timeToEnd;
+        public TimeSpan TimeToEnd
         {
-            get => _seconds;
-            set
+            get => _timeToEnd;
+            private set
             {
-                _seconds = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Seconds)));
-            }
-        }
-
-        private int _minutes;
-        public int Minutes
-        {
-            get => _minutes;
-            set
-            {
-                _minutes = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Minutes)));
-            }
-        }
-
-        private int _hours;
-        public int Hours
-        {
-            get => _hours;
-            set
-            {
-                _hours = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Hours)));
-            }
-        }
-
-        private int _days;
-        public int Days
-        {
-            get => _days;
-            set
-            {
-                _days = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Days)));
+                _timeToEnd = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TimeToEnd)));
             }
         }
 
@@ -83,12 +46,7 @@ namespace MarathonSkills
             _dispatcherTimer = new DispatcherTimer();
             _dispatcherTimer.Tick += (sender, e) =>
             {
-                TimeSpan timeDifference = DateStart - DateTime.Now;
-
-                Days = Convert.ToInt32(timeDifference.TotalDays);
-                Hours = Convert.ToInt32(timeDifference.TotalHours % 24);
-                Minutes = Convert.ToInt32(timeDifference.TotalMinutes % 60);
-                Seconds = Convert.ToInt32(timeDifference.TotalSeconds % 60);
+                TimeToEnd = DateStart - DateTime.Now;
 
             };
             _dispatcherTimer.Interval = new TimeSpan(0, 0, 1);

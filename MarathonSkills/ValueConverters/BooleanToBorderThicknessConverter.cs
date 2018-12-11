@@ -22,4 +22,22 @@ namespace MarathonSkills
             throw new NotImplementedException();
         }
     }
+
+    public class TimeToEndConverter : BaseValueConverter<TimeToEndConverter>
+    {
+        public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            TimeSpan timeToEnd = (TimeSpan)value;
+
+            if (timeToEnd.Milliseconds > 0)
+                return String.Format("{0} дней {1} часов {2} минут {3} секунд до старта марафона!", timeToEnd.Days, timeToEnd.Hours, timeToEnd.Minutes, timeToEnd.Seconds);
+            else
+                return "Марафон уже начался!";
+        }
+
+        public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

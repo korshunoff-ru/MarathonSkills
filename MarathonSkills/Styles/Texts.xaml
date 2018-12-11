@@ -2,15 +2,41 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:MarathonSkills">
 
-    <Style x:Key="MainHeaderTextStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource BaseTextBlockStyle}">
-        <Setter Property="FontFamily" Value="{StaticResource OpenSansSemibold}"/>
-        <Setter Property="FontSize" Value="{StaticResource VeryBigFont}"/>
-        <Setter Property="Foreground" Value="{StaticResource WhiteBrush}"/>
+    <Style x:Key="HeaderTitleTextBlockStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource BaseTextBlockStyle}">
+        <Setter Property="FontSize" Value="{StaticResource HugeSize}"/>
+        <Setter Property="Foreground" Value="{StaticResource ForegroundSecondaryBrush}"/>
+        <Setter Property="FontFamily" Value="{StaticResource RobotoBold}"/>
+        <Setter Property="FontWeight" Value="Bold"/>
     </Style>
-    
-    <Style x:Key="HeaderTextStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource BaseTextBlockStyle}">
-        <Setter Property="FontFamily" Value="{StaticResource OpenSansSemibold}"/>
-        <Setter Property="FontSize" Value="{StaticResource MiddleFont}"/>
+
+    <Style x:Key="ImportantTextBlockStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource BaseTextBlockStyle}">
+        <Setter Property="FontSize" Value="{StaticResource RegularSize}"/>
+        <Setter Property="Foreground" Value="{StaticResource ForegroundSecondaryBrush}"/>
+        <Setter Property="FontFamily" Value="{StaticResource RobotoLight}"/>
+    </Style>
+
+    <Style x:Key="FooterTextBlockStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource BaseTextBlockStyle}">
+        <Setter Property="FontSize" Value="{StaticResource SmallSize}"/>
+        <Setter Property="Foreground" Value="{StaticResource ForegroundSecondaryBrush}"/>
+        <Setter Property="FontFamily" Value="{StaticResource RobotoThin}"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+
+    <Style x:Key="TitleWindowStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource BaseTextBlockStyle}">
+        <Setter Property="FontSize" Value="{StaticResource RegularSize}"/>
+        <Setter Property="Foreground" Value="{StaticResource ForegroundSecondaryBrush}"/>
+        <Setter Property="FontFamily" Value="{StaticResource RobotoThin}"/>
+    </Style>
+
+    <Style x:Key="MenuItemStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource BaseTextBlockStyle}">
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="FontSize" Value="{StaticResource SmallSize}"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="0 5 0 0"/>
+        <Setter Property="Foreground" Value="{StaticResource ForegroundSecondaryBrush}"/>
+        <Setter Property="FontFamily" Value="{StaticResource RobotoMedium}"/>
     </Style>
 
 </ResourceDictionary>

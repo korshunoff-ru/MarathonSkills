@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="MarathonSkills.HeaderPageUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MarathonSkills"
+             mc:Ignorable="d" 
+             d:DesignHeight="150" d:DesignWidth="800">
+    <Grid>
+
+        <Image Source="pack://application:,,,/Images/bg_header.jpg"
+                    Stretch="UniformToFill"></Image>
+
+
+        <Grid Background="#000000"
+                      Opacity="0.3"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch"/>
+
+        <!--<Button Style="{StaticResource BackButton}"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Stretch"
+                    Command="{Binding BackCommand}">
+
+            <ContentControl Width="128" Opacity="1" Content="{StaticResource BackIcon}"/>
+
+        </Button>-->
+
+        <StackPanel HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+
+            <TextBlock Text="Marathon Skills 2019"
+                       Style="{StaticResource HeaderTitleTextBlockStyle}"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
+
+            <TextBlock Text="Россия, Москва"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Style="{StaticResource ImportantTextBlockStyle}"/>
+            
+            <TextBlock Text="1 октября 2019 года"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Style="{StaticResource ImportantTextBlockStyle}"/>
+
+        </StackPanel>
+
+    </Grid>
+
+</UserControl>

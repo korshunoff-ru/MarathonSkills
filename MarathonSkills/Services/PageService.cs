@@ -55,6 +55,10 @@ namespace MarathonSkills
             IsCanBack = true;
         }
 
+        /// <summary>
+        /// Pulls the last page of the stack
+        /// </summary>
+        /// <returns></returns>
         private BasePage PopPageHistroy()
         {
             if (PagesHistory == null || PagesHistory.Count == 0)
@@ -70,6 +74,10 @@ namespace MarathonSkills
             return page;
         }
 
+        /// <summary>
+        /// Goes to the specified page
+        /// </summary>
+        /// <param name="page">Page to which you need to jump</param>
         public async void GoToPage(ApplicationPage page)
         {
             switch (page)
@@ -77,41 +85,85 @@ namespace MarathonSkills
                 case ApplicationPage.HomePage:
                     if (CurrentPage != null)
                     {
-                        await CurrentPage.SlideAndFadeOutToLeftAsync(0.4f);
+                        await new Animation()
+                            .AddSlide(AnimationSlide.SlideToBottom, CurrentPage.WindowHeight)
+                            .AddFade(AnimationFade.FadeOut)
+                            .Start(CurrentPage);
                         PushPageHistroy(CurrentPage);
                     }
                     
                     CurrentPage = new HomePage();
                     CurrentPage.DataContext = BootStrapper.Resolve<HomePageViewModel>();
+                    CurrentPage.Loaded += async (sender, e) =>
+                    {
+                        await new Animation()
+                            .AddSlide(AnimationSlide.SlideFromTop, CurrentPage.WindowWidth)
+                            .AddFade(AnimationFade.FadeIn)
+                            .Start(CurrentPage);
+                    };
                     break;
                 case ApplicationPage.SponsorPage:
                     if (CurrentPage != null)
                     {
-                        await CurrentPage.SlideAndFadeOutToLeftAsync(0.4f);
+                        await new Animation()
+                            .AddSlide(AnimationSlide.SlideToBottom, CurrentPage.WindowHeight)
+                            .AddFade(AnimationFade.FadeOut)
+                            .Start(CurrentPage);
                         PushPageHistroy(CurrentPage);
                     }
                     CurrentPage = new SponsorPage();
                     CurrentPage.DataContext = BootStrapper.Resolve<SponsorPageViewModel>();
+                    CurrentPage.Loaded += async (sender, e) =>
+                    {
+                        await new Animation()
+                            .AddSlide(AnimationSlide.SlideFromTop, CurrentPage.WindowWidth)
+                            .AddFade(AnimationFade.FadeIn)
+                            .Start(CurrentPage);
+                    };
                     break;
                 case ApplicationPage.RunnerPage:
                     if (CurrentPage != null)
                     {
-                        await CurrentPage.SlideAndFadeOutToLeftAsync(0.4f);
+                        await new Animation()
+                            .AddSlide(AnimationSlide.SlideToBottom, CurrentPage.WindowHeight)
+                            .AddFade(AnimationFade.FadeOut)
+                            .Start(CurrentPage);
                         PushPageHistroy(CurrentPage);
                     }
                     CurrentPage = new RunnerPage();
                     CurrentPage.DataContext = BootStrapper.Resolve<RunnerPageViewModel>();
+                    CurrentPage.Loaded += async (sender, e) =>
+                    {
+                        await new Animation()
+                            .AddSlide(AnimationSlide.SlideFromTop, CurrentPage.WindowWidth)
+                            .AddFade(AnimationFade.FadeIn)
+                            .Start(CurrentPage);
+                    };
                     break;
                 default:
                     break;
             }
         }
 
+        /// <summary>
+        /// Returns to the previous page
+        /// </summary>
         public async void GoBack()
         {
             if (PagesHistory != null || PagesHistory.Count != 0)
             {
+                await new Animation()
+                            .AddSlide(AnimationSlide.SlideToTop, CurrentPage.WindowHeight)
+                            .AddFade(AnimationFade.FadeOut)
+                            .Start(CurrentPage);
                 CurrentPage = PopPageHistroy();
+                CurrentPage.Loaded += async (sender, e) =>
+                {
+                    await new Animation()
+                        .AddSlide(AnimationSlide.SlideFromBottom, CurrentPage.WindowWidth)
+                        .AddFade(AnimationFade.FadeIn)
+                        .Start(CurrentPage);
+                };
             }
         }
 
